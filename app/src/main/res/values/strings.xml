@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SimpleSurvey</string>
+    <string name="app_checking_server_health">Checking server health</string>
 </resources>

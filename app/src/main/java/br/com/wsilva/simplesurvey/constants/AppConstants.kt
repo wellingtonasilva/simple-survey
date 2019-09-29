@@ -6,5 +6,6 @@ class AppConstants {
         const val URL_HEALTH_STATUS = "health"
         const val URL_QUESTIONS = "questions"
         const val URL_QUESTION = URL_QUESTIONS + "/{id}"
+        const val HEALTH_STATUS_OK = "OK"
     }
 }
