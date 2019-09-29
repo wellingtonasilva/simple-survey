@@ -1,5 +1,6 @@
 package br.com.wsilva.simplesurvey.features.splash
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import br.com.wsilva.simplesurvey.AppApplication
 import br.com.wsilva.simplesurvey.R
 import br.com.wsilva.simplesurvey.core.BasicFragment
 import br.com.wsilva.simplesurvey.di.AppModule
+import br.com.wsilva.simplesurvey.features.health.HealthStatusActivity
 import br.com.wsilva.simplesurvey.features.splash.di.DaggerSplashComponent
 import br.com.wsilva.simplesurvey.features.splash.di.SplashModule
 import javax.inject.Inject
@@ -46,8 +48,14 @@ class SplashFragment: BasicFragment(), SplashContract.View {
         presenter.checkHealthStatus()
     }
 
+    override fun onDestroy() {
+        presenter.onDestroy()
+        super.onDestroy()
+    }
+
     override fun showHealthStatus() {
-        Toast.makeText(context, "showHealthStatus", Toast.LENGTH_SHORT).show()
+        val intent = Intent(context, HealthStatusActivity::class.java)
+        startActivity(intent)
     }
 
     override fun showQuestionList() {

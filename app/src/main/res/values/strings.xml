@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">SimpleSurvey</string>
     <string name="app_checking_server_health">Checking server health</string>
+    <string name="app_whoops">Whoops</string>
+    <string name="app_sorry">Sorry, It\'s not you. It\'s us!</string>
+    <string name="app_please_try_again">Please try again</string>
 </resources>
