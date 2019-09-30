@@ -4,4 +4,7 @@
     <string name="app_whoops">Whoops</string>
     <string name="app_sorry">Sorry, It\'s not you. It\'s us!</string>
     <string name="app_please_try_again">Please try again</string>
+    <string name="app_oops">Ooops!</string>
+    <string name="app_no_connection">Slow or no internet connection</string>
+    <string name="app_please_check_connection">Please check your connection</string>
 </resources>
