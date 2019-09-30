@@ -23,6 +23,7 @@
 
         <activity android:name=".features.health.HealthStatusActivity" />
         <activity android:name=".features.noconnection.NoConnectionActivity" />
+        <activity android:name=".features.questionlist.QuestionListActivity" />
     </application>
 
 </manifest>
