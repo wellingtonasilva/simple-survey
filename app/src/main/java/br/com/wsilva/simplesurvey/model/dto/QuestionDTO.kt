@@ -2,7 +2,7 @@ package br.com.wsilva.simplesurvey.model.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class QuestionDTO(@SerializedName("id") val id: Int,
+data class QuestionDTO(@SerializedName("id") val id: Long,
                        @SerializedName("question") val question: String,
                        @SerializedName("image_url") val image_url: String,
                        @SerializedName("thumb_url") val thumb_url: String,

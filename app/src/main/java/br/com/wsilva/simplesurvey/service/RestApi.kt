@@ -13,7 +13,7 @@ interface RestApi {
 
     @GET(AppConstants.URL_QUESTIONS)
     fun getQuestions(@Query("limit") limit: Int, @Query("offset") offset: Int,
-                     @Query("filter") filter: String): Observable<QuestionDTO>
+                     @Query("filter") filter: String): Observable<List<QuestionDTO>>
 
     @GET(AppConstants.URL_QUESTION)
     fun getQuestion(@Path("id") id: Long): Observable<QuestionDTO>

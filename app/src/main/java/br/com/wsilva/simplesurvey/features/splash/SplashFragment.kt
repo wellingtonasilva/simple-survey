@@ -11,6 +11,7 @@ import br.com.wsilva.simplesurvey.R
 import br.com.wsilva.simplesurvey.core.BasicFragment
 import br.com.wsilva.simplesurvey.di.AppModule
 import br.com.wsilva.simplesurvey.features.health.HealthStatusActivity
+import br.com.wsilva.simplesurvey.features.questionlist.QuestionListActivity
 import br.com.wsilva.simplesurvey.features.splash.di.DaggerSplashComponent
 import br.com.wsilva.simplesurvey.features.splash.di.SplashModule
 import javax.inject.Inject
@@ -59,6 +60,7 @@ class SplashFragment: BasicFragment(), SplashContract.View {
     }
 
     override fun showQuestionList() {
-        Toast.makeText(context, "showQuestionList", Toast.LENGTH_SHORT).show()
+        val intent = Intent(context, QuestionListActivity::class.java)
+        startActivity(intent)
     }
 }
