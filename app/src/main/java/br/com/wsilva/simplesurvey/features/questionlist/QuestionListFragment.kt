@@ -1,16 +1,17 @@
 package br.com.wsilva.simplesurvey.features.questionlist
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.wsilva.simplesurvey.AppApplication
 import br.com.wsilva.simplesurvey.R
 import br.com.wsilva.simplesurvey.core.BasicFragment
 import br.com.wsilva.simplesurvey.di.AppModule
+import br.com.wsilva.simplesurvey.features.questiondetail.QuestionDetailActivity
 import br.com.wsilva.simplesurvey.features.questionlist.di.DaggerQuestionListComponent
 import br.com.wsilva.simplesurvey.features.questionlist.di.QuestionListModule
 import br.com.wsilva.simplesurvey.model.entity.QuestionEntity
@@ -63,6 +64,11 @@ class QuestionListFragment: BasicFragment(), QuestionListContract.View,
     }
 
     override fun OnClickListener(questionEntity: QuestionEntity) {
-        Toast.makeText(context, "${questionEntity.id} : ${questionEntity.question}", Toast.LENGTH_SHORT).show()
+        showQuestionDetail(questionEntity.id)
+    }
+
+    override fun showQuestionDetail(questionId: Long) {
+        val intent = Intent(context, QuestionDetailActivity::class.java)
+        startActivity(intent)
     }
 }

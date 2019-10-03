@@ -32,6 +32,7 @@ class AppQuestionRepository {
         return restApi
             .getQuestions(limit, offset, filter)
             .flatMap { saveQuestion(it) }
+            .flatMap { saveChoices(it) }
             .flatMap { listQuestion() }
     }
 
@@ -42,6 +43,16 @@ class AppQuestionRepository {
             }
             it.onNext(list)
             it.onComplete()
+        }
+    }
+
+    fun saveChoices(list: List<QuestionDTO>): Observable<Unit> {
+        return Observable.create<Unit> {
+           list.forEach {
+               it.choices.forEach { item ->
+                   choiceRepository.save(it.id, item)
+               }
+           }
         }
     }
 

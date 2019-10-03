@@ -6,6 +6,7 @@ import br.com.wsilva.simplesurvey.model.entity.QuestionEntity
 interface QuestionListContract {
     interface View {
         fun showQuestion(list: List<QuestionEntity>)
+        fun showQuestionDetail(questionId: Long)
     }
 
     interface Presenter: BasicPresenter {
