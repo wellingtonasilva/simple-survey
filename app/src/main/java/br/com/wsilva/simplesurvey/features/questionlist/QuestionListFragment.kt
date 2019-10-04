@@ -4,9 +4,8 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.wsilva.simplesurvey.AppApplication
 import br.com.wsilva.simplesurvey.R
@@ -52,7 +51,28 @@ class QuestionListFragment: BasicFragment(), QuestionListContract.View,
     {
         val view = inflater?.inflate(R.layout.lay_question_list_fragment, container, false)
         view.fab.setOnClickListener { showShare() }
+        setHasOptionsMenu(true)
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater?)
+    {
+        val inflater = inflater
+        inflater?.inflate(R.menu.menu_search, menu)
+        val searchView =  (menu.findItem(R.id.action_search).actionView as SearchView)
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean
+            {
+                presenter.onQueryTextSubmit(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean
+            {
+                return false
+            }
+        })
     }
 
     override fun onResume() {

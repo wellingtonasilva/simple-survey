@@ -74,6 +74,7 @@ class SplashFragment: BasicFragment(), SplashContract.View, CheckConnectionRecei
 
     override fun showQuestionList() {
         val intent = Intent(context, QuestionListActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
         activity?.finish()
     }

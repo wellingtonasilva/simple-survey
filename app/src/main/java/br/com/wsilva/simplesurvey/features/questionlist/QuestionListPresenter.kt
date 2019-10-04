@@ -40,4 +40,14 @@ class QuestionListPresenter: QuestionListContract.Presenter {
                 .subscribe { view.showQuestion(it) }
         )
     }
+
+    override fun onQueryTextSubmit(query: String) {
+        bag.add(
+            repository
+                .getQuestions(10, 0, query)
+                .observeOn(schedulers.ui())
+                .subscribeOn(schedulers.io())
+                .subscribe { view.showQuestion(it) }
+        )
+    }
 }

@@ -12,5 +12,6 @@ interface QuestionListContract {
 
     interface Presenter: BasicPresenter {
         fun listAll()
+        fun onQueryTextSubmit(query: String)
     }
 }

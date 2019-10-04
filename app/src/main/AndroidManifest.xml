@@ -19,10 +19,17 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".core.SearchableActivity"/>
         </activity>
         <activity android:name=".features.health.HealthStatusActivity" />
         <activity android:name=".features.noconnection.NoConnectionActivity" />
-        <activity android:name=".features.questionlist.QuestionListActivity" />
+        <activity android:name=".features.questionlist.QuestionListActivity">
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".core.SearchableActivity"/>
+        </activity>
         <activity
             android:name=".features.questiondetail.QuestionDetailActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -37,6 +44,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".features.share.ShareActivity" />
+        <activity android:name=".core.SearchableActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
     </application>
 
 </manifest>
