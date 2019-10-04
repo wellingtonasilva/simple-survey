@@ -65,6 +65,7 @@ class QuestionListFragment: BasicFragment(), QuestionListContract.View,
         super.onPause()
         context?.unregisterReceiver(broadcastReceiver)
     }
+
     override fun showQuestion(list: List<QuestionEntity>) {
         recyclerView.setHasFixedSize(true)
         val linearLayoutManager =  LinearLayoutManager(context)

@@ -37,7 +37,7 @@ class SplashPresenter: SplashContract.Presenter {
                 .getHealthStatus()
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.ui())
-                .subscribe { doAfterCheckHealthStatus(it) }
+                .subscribe({ doAfterCheckHealthStatus(it)}, {})
         )
     }
 

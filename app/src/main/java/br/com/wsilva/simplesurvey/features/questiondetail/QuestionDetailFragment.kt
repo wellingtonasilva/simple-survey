@@ -1,6 +1,8 @@
 package br.com.wsilva.simplesurvey.features.questiondetail
 
 import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -58,8 +60,14 @@ class QuestionDetailFragment: BasicFragment(), QuestionDetailContract.View,
 
     override fun onResume() {
         super.onResume()
+        context?.registerReceiver(broadcastReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
         presenter.loadQuestion(presenter.questionId)
         presenter.loadChoises(presenter.questionId)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        context?.unregisterReceiver(broadcastReceiver)
     }
 
     override fun showChoises(list: List<ChoiceEntity>) {
