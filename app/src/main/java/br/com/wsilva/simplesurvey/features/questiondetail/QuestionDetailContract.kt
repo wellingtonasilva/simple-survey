@@ -9,9 +9,11 @@ interface QuestionDetailContract {
     interface View {
         fun showQuestion(questionEntity: QuestionEntity)
         fun showChoises(list: List<ChoiceEntity>)
+        fun showShare(questionId: Long)
     }
 
     interface Presenter: BasicPresenter {
+        var questionId: Long
         fun loadQuestion(questionId: Long)
         fun loadChoises(questionId: Long)
     }

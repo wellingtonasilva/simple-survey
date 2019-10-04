@@ -10,8 +10,14 @@ interface ChoiceDAO: BasicDAO<ChoiceEntity> {
     @Query("SELECT * FROM question_choice")
     override fun listAll(): List<ChoiceEntity>
 
+    @Query("SELECT * FROM question_choice WHERE question_id = :questionId")
+    fun listByQuestionId(questionId: Long): List<ChoiceEntity>
+
     @Query("SELECT * FROM question_choice WHERE id = :id")
     override fun get(id: Long): ChoiceEntity
+
+    @Query("SELECT * FROM question_choice WHERE question_id = :questionId AND choice = :choice")
+    fun getByQuestionIdAndChoice(questionId: Long, choice: String): ChoiceEntity
 
     @Delete
     override fun delete(entity: ChoiceEntity): Int

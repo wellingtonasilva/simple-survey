@@ -4,6 +4,7 @@ import br.com.wsilva.simplesurvey.core.BasicRepository
 import br.com.wsilva.simplesurvey.model.dao.QuestionDAO
 import br.com.wsilva.simplesurvey.model.dto.QuestionDTO
 import br.com.wsilva.simplesurvey.model.entity.QuestionEntity
+import io.reactivex.Observable
 
 class QuestionRepository(private val dao: QuestionDAO): BasicRepository<QuestionEntity>(dao) {
 
@@ -25,5 +26,12 @@ class QuestionRepository(private val dao: QuestionDAO): BasicRepository<Question
             return dao.insert(entity)
         }
         return entity.id
+    }
+
+    fun getQuestion(questionId: Long): Observable<QuestionEntity> {
+        return Observable.create<QuestionEntity> {
+            it.onNext(get(questionId))
+            it.onComplete()
+        }
     }
 }

@@ -5,24 +5,11 @@ import br.com.wsilva.simplesurvey.di.AppSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-class QuestionDetailPresenter: QuestionDetailContract.Presenter {
-
-    private val view: QuestionDetailContract.View
-    private val bag: CompositeDisposable
-    private val schedulers: AppSchedulers
-    private val repository: AppQuestionRepository
-
-    @Inject
-    constructor(view: QuestionDetailContract.View,
-                bag: CompositeDisposable,
-                schedulers: AppSchedulers,
-                appQuestionRepository: AppQuestionRepository
-    ) {
-        this.view = view
-        this.bag = bag
-        this.schedulers = schedulers
-        this.repository = appQuestionRepository
-    }
+class QuestionDetailPresenter @Inject constructor(override var questionId: Long,
+                                                  private val view: QuestionDetailContract.View,
+                                                  private val bag: CompositeDisposable,
+                                                  private val schedulers: AppSchedulers,
+                                                  private val repository: AppQuestionRepository) : QuestionDetailContract.Presenter {
 
     override fun onCreate() {
     }
@@ -32,11 +19,24 @@ class QuestionDetailPresenter: QuestionDetailContract.Presenter {
     }
 
     override fun loadChoises(questionId: Long) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        bag.add(
+            repository
+                .listChoicesByQuestionId(questionId)
+                .observeOn(schedulers.ui())
+                .subscribeOn(schedulers.io())
+                .subscribe { view.showChoises(it) }
+        )
     }
 
     override fun loadQuestion(questionId: Long) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        bag.add(
+            repository
+                .questionRepository
+                .getQuestion(questionId)
+                .observeOn(schedulers.ui())
+                .subscribeOn(schedulers.io())
+                .subscribe { view.showQuestion(it) }
+        )
     }
 
 }

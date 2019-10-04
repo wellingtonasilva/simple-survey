@@ -9,7 +9,8 @@ import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
 
 @Module
-class QuestionDetailModule(private val view: QuestionDetailContract.View) {
+class QuestionDetailModule(private val view: QuestionDetailContract.View,
+                           private val questionId: Long) {
 
     @Provides
     fun providesQuestionDetailView(): QuestionDetailContract.View = view
@@ -21,6 +22,6 @@ class QuestionDetailModule(private val view: QuestionDetailContract.View) {
                                         appQuestionRepository: AppQuestionRepository
     ): QuestionDetailContract.Presenter
     {
-        return QuestionDetailPresenter(view, bag, schedulers, appQuestionRepository)
+        return QuestionDetailPresenter(questionId, view, bag, schedulers, appQuestionRepository)
     }
 }

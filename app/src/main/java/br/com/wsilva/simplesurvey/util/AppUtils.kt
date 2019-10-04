@@ -1,8 +1,10 @@
 package br.com.wsilva.simplesurvey.util
 
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.text.Html
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -42,6 +44,17 @@ class AppUtils {
             val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
 
             return activeNetwork?.isConnectedOrConnecting == true
+        }
+
+        fun share(context: Context, url: String, email: String) {
+            val body = "<a href=\"" + url + "\">" + url+ "</a>"
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+            intent.putExtra(Intent.EXTRA_SUBJECT,  url)
+            intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(body))
+            intent.type = "text/html"
+
+            context.startActivity(Intent.createChooser(intent, ""))
         }
     }
 }

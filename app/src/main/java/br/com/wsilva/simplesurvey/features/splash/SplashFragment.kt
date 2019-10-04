@@ -62,5 +62,6 @@ class SplashFragment: BasicFragment(), SplashContract.View {
     override fun showQuestionList() {
         val intent = Intent(context, QuestionListActivity::class.java)
         startActivity(intent)
+        activity?.finish()
     }
 }

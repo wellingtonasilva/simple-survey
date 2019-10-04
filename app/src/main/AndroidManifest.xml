@@ -25,8 +25,18 @@
         <activity android:name=".features.questionlist.QuestionListActivity" />
         <activity
             android:name=".features.questiondetail.QuestionDetailActivity"
-            android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="blissrecruitment"
+                    android:host="questions"
+                    />
+            </intent-filter>
+        </activity>
+        <activity android:name=".features.share.ShareActivity" />
     </application>
 
 </manifest>

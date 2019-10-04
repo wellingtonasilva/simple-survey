@@ -1,12 +1,11 @@
-package br.com.wsilva.simplesurvey.features.noconnection
+package br.com.wsilva.simplesurvey.features.share
 
 import android.os.Bundle
 import br.com.wsilva.simplesurvey.R
 import br.com.wsilva.simplesurvey.core.BasicActivity
-import br.com.wsilva.simplesurvey.util.AppUtils
+import br.com.wsilva.simplesurvey.features.questiondetail.QuestionDetailFragment
 
-class NoConnectionActivity: BasicActivity() {
-
+class ShareActivity: BasicActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.lay_basic_activity)
@@ -16,23 +15,15 @@ class NoConnectionActivity: BasicActivity() {
     private fun init(savedInstanceState: Bundle?)
     {
         val fragmentManager = supportFragmentManager
-        var fragment = fragmentManager.findFragmentByTag(NoConnectionFragment.TAG)
+        var fragment = fragmentManager.findFragmentByTag(ShareFragment.TAG)
         if (fragment == null) {
-            fragment = NoConnectionFragment.newInstance()
+            fragment = ShareFragment.newInstance()
         }
         if (savedInstanceState == null) {
             fragment.arguments = intent.extras
         } else {
             fragment.arguments = savedInstanceState
         }
-        addFragmentToActivity(fragmentManager, fragment, R.id.frameLayout, NoConnectionFragment.TAG)
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        if (!AppUtils.isConnected(this)) {
-            moveTaskToBack(true)
-            finishAndRemoveTask()
-        }
+        addFragmentToActivity(fragmentManager, fragment, R.id.frameLayout, ShareFragment.TAG)
     }
 }

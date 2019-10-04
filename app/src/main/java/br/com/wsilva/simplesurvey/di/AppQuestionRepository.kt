@@ -1,6 +1,7 @@
 package br.com.wsilva.simplesurvey.di
 
 import br.com.wsilva.simplesurvey.model.dto.QuestionDTO
+import br.com.wsilva.simplesurvey.model.entity.ChoiceEntity
 import br.com.wsilva.simplesurvey.model.entity.QuestionEntity
 import br.com.wsilva.simplesurvey.model.repository.ChoiceRepository
 import br.com.wsilva.simplesurvey.model.repository.QuestionRepository
@@ -53,12 +54,21 @@ class AppQuestionRepository {
                    choiceRepository.save(it.id, item)
                }
            }
+            it.onNext(Unit)
+            it.onComplete()
         }
     }
 
     fun listQuestion(): Observable<List<QuestionEntity>> {
         return Observable.create<List<QuestionEntity>> {
             it.onNext(this.questionRepository.listAll())
+            it.onComplete()
+        }
+    }
+
+    fun listChoicesByQuestionId(questionId: Long): Observable<List<ChoiceEntity>> {
+        return Observable.create<List<ChoiceEntity>> {
+            it.onNext(this.choiceRepository.listByQuestionId(questionId))
             it.onComplete()
         }
     }

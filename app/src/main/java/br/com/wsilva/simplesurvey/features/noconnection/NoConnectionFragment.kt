@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import br.com.wsilva.simplesurvey.R
 import br.com.wsilva.simplesurvey.core.BasicFragment
 import br.com.wsilva.simplesurvey.util.CheckConnectionReceiver
@@ -46,6 +45,8 @@ class NoConnectionFragment: BasicFragment(), CheckConnectionReceiver.CheckConnec
     }
 
     override fun OnConnectionChange(isOnline: Boolean) {
-        Toast.makeText(context, "isOnline: $isOnline", Toast.LENGTH_SHORT).show()
+        if (isOnline) {
+            activity?.finish()
+        }
     }
 }

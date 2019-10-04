@@ -7,6 +7,7 @@ interface QuestionListContract {
     interface View {
         fun showQuestion(list: List<QuestionEntity>)
         fun showQuestionDetail(questionId: Long)
+        fun showShare()
     }
 
     interface Presenter: BasicPresenter {
