@@ -20,4 +20,5 @@
     <string name="app_deep_link_id">blissrecruitment://questions?question_id=%1$s</string>
     <string name="app_deep_link_filter">blissrecruitment://questions?question_filter=%1$s</string>
     <string name="app_pesquisar">Localizar</string>
+    <string name="app_loading">Loading</string>
 </resources>

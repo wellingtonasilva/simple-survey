@@ -1,7 +1,9 @@
 package br.com.wsilva.simplesurvey.core
 
-abstract class BasicRepository<T>(private val dao: BasicDAO<T>) {
-    abstract fun listAll() : List<T>
+import androidx.paging.DataSource
+
+abstract class BasicRepository<U, T>(private val dao: BasicDAO<U, T>) {
+    abstract fun listAll() : DataSource.Factory<U, T>
     abstract fun get(id : Long) : T
     abstract fun delete(entity : T) : Int
     abstract fun insert(entity : T) : Long

@@ -1,7 +1,9 @@
 package br.com.wsilva.simplesurvey.core
 
-interface BasicDAO<T> {
-    fun listAll() : List<T>
+import androidx.paging.DataSource
+
+interface BasicDAO<U, T> {
+    fun listAll() : DataSource.Factory<U, T>
     fun get(id: Long) : T
     fun delete(entity: T) : Int
     fun insert(entity: T) : Long

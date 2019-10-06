@@ -1,13 +1,14 @@
 package br.com.wsilva.simplesurvey.model.repository
 
+import androidx.paging.DataSource
 import br.com.wsilva.simplesurvey.core.BasicRepository
 import br.com.wsilva.simplesurvey.model.dao.ChoiceDAO
 import br.com.wsilva.simplesurvey.model.dto.ChoiceDTO
 import br.com.wsilva.simplesurvey.model.entity.ChoiceEntity
 
-class ChoiceRepository(private val dao: ChoiceDAO): BasicRepository<ChoiceEntity>(dao) {
+class ChoiceRepository(private val dao: ChoiceDAO): BasicRepository<Int, ChoiceEntity>(dao) {
 
-    override fun listAll(): List<ChoiceEntity>  = dao.listAll()
+    override fun listAll(): DataSource.Factory<Int, ChoiceEntity>  = dao.listAll()
     fun listByQuestionId(questionId: Long): List<ChoiceEntity> = dao.listByQuestionId(questionId)
     override fun get(id: Long): ChoiceEntity = dao.get(id)
     fun getByQuestionIdAndChoice(questionId: Long, choice: String): ChoiceEntity

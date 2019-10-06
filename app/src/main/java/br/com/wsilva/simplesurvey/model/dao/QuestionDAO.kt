@@ -1,14 +1,15 @@
 package br.com.wsilva.simplesurvey.model.dao
 
+import androidx.paging.DataSource
 import androidx.room.*
 import br.com.wsilva.simplesurvey.core.BasicDAO
 import br.com.wsilva.simplesurvey.model.entity.QuestionEntity
 
 @Dao
-interface QuestionDAO: BasicDAO<QuestionEntity> {
+interface QuestionDAO: BasicDAO<Int, QuestionEntity> {
 
     @Query("SELECT * FROM question")
-    override fun listAll(): List<QuestionEntity>
+    override fun listAll(): DataSource.Factory<Int, QuestionEntity>
 
     @Query("SELECT * FROM question WHERE id = :id")
     override fun get(id: Long): QuestionEntity

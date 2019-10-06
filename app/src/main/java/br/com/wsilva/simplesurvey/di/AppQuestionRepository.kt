@@ -1,5 +1,7 @@
 package br.com.wsilva.simplesurvey.di
 
+import androidx.paging.PagedList
+import androidx.paging.RxPagedListBuilder
 import br.com.wsilva.simplesurvey.model.dto.QuestionDTO
 import br.com.wsilva.simplesurvey.model.entity.ChoiceEntity
 import br.com.wsilva.simplesurvey.model.entity.QuestionEntity
@@ -29,7 +31,7 @@ class AppQuestionRepository {
     }
 
 
-    fun getQuestions(limit: Int, offset: Int, filter: String): Observable<List<QuestionEntity>> {
+    fun getQuestions(limit: Int, offset: Int, filter: String): Observable<PagedList<QuestionEntity>> {
         return restApi
             .getQuestions(limit, offset, filter)
             .flatMap { saveQuestion(it) }
@@ -59,11 +61,8 @@ class AppQuestionRepository {
         }
     }
 
-    fun listQuestion(): Observable<List<QuestionEntity>> {
-        return Observable.create<List<QuestionEntity>> {
-            it.onNext(this.questionRepository.listAll())
-            it.onComplete()
-        }
+    fun listQuestion(): Observable<PagedList<QuestionEntity>> {
+        return RxPagedListBuilder(this.questionRepository.listAll(), 10).buildObservable()
     }
 
     fun listChoicesByQuestionId(questionId: Long): Observable<List<ChoiceEntity>> {

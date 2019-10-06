@@ -10,6 +10,7 @@ ext {
     rx_android = '2.1.1'
     rx_java = '2.2.8'
     lifecycle_version = "2.1.0"
+    paging_version = "2.1.0"
 }
 
 android {
@@ -91,4 +92,12 @@ dependencies {
     // Fly Animation
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
     implementation 'androidx.dynamicanimation:dynamicanimation:1.1.0-alpha01'
+
+    implementation "androidx.paging:paging-runtime:$paging_version" // For Kotlin use paging-runtime-ktx
+
+    // alternatively - without Android dependencies for testing
+    testImplementation "androidx.paging:paging-common:$paging_version" // For Kotlin use paging-common-ktx
+
+    // optional - RxJava support
+    implementation "androidx.paging:paging-rxjava2:$paging_version" // For Kotlin use paging-rxjava2-ktx
 }

@@ -1,14 +1,15 @@
 package br.com.wsilva.simplesurvey.model.dao
 
+import androidx.paging.DataSource
 import androidx.room.*
 import br.com.wsilva.simplesurvey.core.BasicDAO
 import br.com.wsilva.simplesurvey.model.entity.ChoiceEntity
 
 @Dao
-interface ChoiceDAO: BasicDAO<ChoiceEntity> {
+interface ChoiceDAO: BasicDAO<Int, ChoiceEntity> {
 
     @Query("SELECT * FROM question_choice")
-    override fun listAll(): List<ChoiceEntity>
+    override fun listAll(): DataSource.Factory<Int, ChoiceEntity>
 
     @Query("SELECT * FROM question_choice WHERE question_id = :questionId")
     fun listByQuestionId(questionId: Long): List<ChoiceEntity>

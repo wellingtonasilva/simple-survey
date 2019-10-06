@@ -1,14 +1,15 @@
 package br.com.wsilva.simplesurvey.model.repository
 
+import androidx.paging.DataSource
 import br.com.wsilva.simplesurvey.core.BasicRepository
 import br.com.wsilva.simplesurvey.model.dao.QuestionDAO
 import br.com.wsilva.simplesurvey.model.dto.QuestionDTO
 import br.com.wsilva.simplesurvey.model.entity.QuestionEntity
 import io.reactivex.Observable
 
-class QuestionRepository(private val dao: QuestionDAO): BasicRepository<QuestionEntity>(dao) {
+class QuestionRepository(private val dao: QuestionDAO): BasicRepository<Int, QuestionEntity>(dao) {
 
-    override fun listAll(): List<QuestionEntity>  = dao.listAll()
+    override fun listAll(): DataSource.Factory<Int, QuestionEntity>  = dao.listAll()
     override fun get(id: Long): QuestionEntity = dao.get(id)
     override fun delete(entity: QuestionEntity): Int = dao.delete(entity)
     override fun insert(entity: QuestionEntity): Long  = dao.insert(entity)

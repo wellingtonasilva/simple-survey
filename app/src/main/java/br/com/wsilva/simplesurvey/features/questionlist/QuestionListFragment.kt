@@ -6,6 +6,7 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.wsilva.simplesurvey.AppApplication
 import br.com.wsilva.simplesurvey.R
@@ -28,7 +29,8 @@ class QuestionListFragment: BasicFragment(), QuestionListContract.View,
 
     @Inject
     lateinit var presenter: QuestionListContract.Presenter
-    val broadcastReceiver = CheckConnectionReceiver(this)
+    private val broadcastReceiver = CheckConnectionReceiver(this)
+    private val adapter = QuestionListAdapter(this)
 
     companion object {
         val TAG: String = "QuestionListFragment"
@@ -86,11 +88,12 @@ class QuestionListFragment: BasicFragment(), QuestionListContract.View,
         context?.unregisterReceiver(broadcastReceiver)
     }
 
-    override fun showQuestion(list: List<QuestionEntity>) {
-        recyclerView.setHasFixedSize(true)
+    override fun showQuestion(list: PagedList<QuestionEntity>) {
+        adapter.submitList(list)
         val linearLayoutManager =  LinearLayoutManager(context)
+        recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = linearLayoutManager
-        recyclerView.adapter = QuestionListAdapter(context!!, list, this@QuestionListFragment)
+        recyclerView.adapter = adapter
     }
 
     override fun showShare() {
